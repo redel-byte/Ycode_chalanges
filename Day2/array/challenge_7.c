@@ -1,31 +1,41 @@
 #include <stdio.h>
 
-int main()
+void tree(int numbers[],int lenght)
 {
-    int index;
-    printf("Enter the value of the index: ");
-    scanf("%d", &index);
-    int arr_copp[index];
-    int compare[index];
-    int arr_input[index];
-    int min;
-    int index;
-    int i;
-    compare[index] = arr_input[index];
-    while (i < index)
-    {
-        printf("arr[%d] = ", i);
-        scanf("%d", arr_input[i]);
-        i++;
-    }
-    //-----------------------------
-    for (int b = 0; i < index; b++)
-    {
-        min = arr_input[0];
-        if (min > arr_input[b])
-        {
-            min = arr_input[b];
-            for (int b = 0; i <)
-        }
+  int num_buffer;
+  for(int i = 0;i < lenght-1;i++){
+    if(numbers[i]>numbers[i+1]){
+      num_buffer = numbers[i];
+      numbers[i] = numbers[i+1];
+      numbers[i + 1] = num_buffer;
     }
 }
+}
+ 
+
+
+int main(){
+
+  int n; 
+  printf("n=");
+  scanf("%d",&n);
+  int numbers[n];
+  for(int i = 0;i < n;i++){
+    printf("numbers[%d] = ",i + 1);
+    scanf("%d",&numbers[i]);
+
+  }
+    tree(numbers,n);
+  printf("[");
+    for(int i =0;i<n;i++){
+      printf("%d",numbers[i]);
+    if(i < n - 1){
+      printf(", ");
+    }
+    }
+  printf("]");
+  return 0;
+  }
+
+
+
