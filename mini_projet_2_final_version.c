@@ -34,30 +34,64 @@ void menu(){
     "Choice: "
   );
 }
+int check_email(char email[]){
+  int found_aro = 0,found_dot = 0,j;
+  for(int i = 0;i < strlen(email);i++){
+    if(email[i] == '@'){
+      found_aro++;
+      j = i + 1;
+    }
+    if(email[j] == '.'){
+      found_dot++;
+    }
+    j++;
+  }
+  if(found_aro != 1 && found_dot!= 1){
+    return -1;
+  }
+  return 0;
+}
+int check_phone(char phone[]){
+  int len = strlen(phone);
+  if(len != 9){
+    return -1;
+  }
+  return 0;
+}
 
-void ajouter_contact(struct contact contacts[], int *count){
+int ajouter_contact(struct contact contacts[], int *count){
   char name[50], phone[50], email[50];
   printf("Entrez le nom de contact: ");
   fgets(name,sizeof(name),stdin);
   remove_new_line_lowercase(name);
+  strcpy(contacts[*count].nom, name);
 
-  printf("Entez le numero de contact: ");
+  printf("Entez le numero de contact: 212");
   fgets(phone,sizeof(phone),stdin);
   remove_new_line_lowercase(phone);
+  if(!check_phone(phone))
+    strcpy(contacts[*count].phone, phone);
+  else{
+    printf("[!] Invalid phone number.\n");
+    return -1; 
+  }
 
   printf("Entrez l'email de contact: ");
   fgets(email,sizeof(email),stdin);
   remove_new_line_lowercase(email);
-
-  strcpy(contacts[*count].nom, name);
-  strcpy(contacts[*count].phone, phone);
+  if(!check_email(email)){
   strcpy(contacts[*count].email, email);
-  (*count)++;
+  }
+  else{
+        printf("[!] Invalid format.\nexample@example.com");
+  }
   
-  printf("[+] (%s||%s||%s) --> ajoute avec succes.\n",
-         contacts[*count - 1].nom,
-         contacts[*count - 1].phone,
-         contacts[*count - 1].email);
+  printf("[+] (%s||%s||%s) --> Added secusfelly.\n",
+         contacts[*count].nom,
+         contacts[*count].phone,
+         contacts[*count].email);
+    (*count)++;
+  return 0;
 }
 
 void modifier_contact(struct contact contacts[], int count){
@@ -103,7 +137,7 @@ void modifier_contact(struct contact contacts[], int count){
     }
   }
   if(!found){
-    printf("[!] Contact non trouve.\n");
+    printf("[!] Contact not found.\n");
   }
 }
 
@@ -111,7 +145,7 @@ void supprimer_contacts(struct contact contacts[], int *count){
   char nom_suppr_buffer[50];
   int found = 0;
 
-  printf("Nom de contact a supprimer: ");
+  printf("name of the contact is deleted");
   fgets(nom_suppr_buffer,sizeof(nom_suppr_buffer),stdin);
   remove_new_line_lowercase(nom_suppr_buffer);
 
@@ -122,12 +156,12 @@ void supprimer_contacts(struct contact contacts[], int *count){
         contacts[j] = contacts[j+1];
       }
       (*count)--;
-      printf("[+] Le contact %s a ete supprime.\n", nom_suppr_buffer);
+      printf("[+] The contact %s Deleted.\n", nom_suppr_buffer);
       break;
     }
   }
   if(!found){
-    printf("[!] Contact %s non trouve.\n", nom_suppr_buffer);
+    printf("[!] Contact %s not found.\n", nom_suppr_buffer);
   }
 }
 
@@ -142,7 +176,7 @@ void Rechercher_contact(struct contact contacts[], int count){
   char searching_name[50];
   int found = 0;
 
-  printf("Rechercher: ");
+  printf("Searching: ");
   fgets(searching_name,sizeof(searching_name),stdin);
   remove_new_line_lowercase(searching_name);
 
@@ -187,7 +221,7 @@ int main(){
       case 6:
         exit(0);
       default:
-        printf("[!] Option indisponible.\n");
+        printf("[!] Invalid choice.\n");
     }
   }
 }
