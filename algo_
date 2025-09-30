@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+
+void tree(int arr[], int len)
+{
+    int buffer;
+
+    for (int i = 0; i < len; i++)
+    {
+        for (int j = 1; j < len; j++)
+        {
+            if (arr[i] > arr[j])
+            {
+                buffer = arr[i];
+                arr[i] = arr[j];
+            }
+        }
+    }
+}
+
+void print(int arr[], int len)
+{
+    printf("[");
+    for (int i = 0; i < len; i++)
+    {
+        printf("%d", arr[i]);
+        if (i < len - 1)
+            printf(",");
+    }
+    printf("]");
+}
+
+int main()
+{
+    int len;
+    printf("Enter the lenght of the array: ");
+    scanf("%d", &len);
+    getchar();
+    int s
+}
