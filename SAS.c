@@ -51,7 +51,7 @@ void tree_nom(struct zoo animal[], int length)
 void tree_age(struct zoo animal[], int length)
 {
     struct zoo buffer;
-    for (int i = 0; i < length - 1; i++)
+    for (int i = 0; i < length; i++)
     {
         for (int j = i + 1; j < length; j++)
         {
